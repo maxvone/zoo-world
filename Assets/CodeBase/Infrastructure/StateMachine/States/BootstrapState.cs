@@ -1,4 +1,5 @@
 ﻿using CodeBase.AssetManagement;
+using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
 using CodeBase.UI.Services.Factory;
 
@@ -30,6 +31,7 @@ namespace CodeBase.Infrastructure.States
             RegisterAssetProvider();
             _services.RegisterSingle<ISceneLoaderService>(new SceneLoaderService());
             _services.RegisterSingle<IUiFactory>(new UiFactory(_services.Single<IAssetProvider>()));
+            _services.RegisterSingle<IGameFactory>(new GameFactory(_services.Single<IAssetProvider>()));
         }
 
         private void RegisterAssetProvider()

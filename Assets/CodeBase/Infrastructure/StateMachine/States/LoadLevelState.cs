@@ -1,4 +1,7 @@
-﻿using CodeBase.Services;
+﻿using System;
+using System.Threading.Tasks;
+using CodeBase.Infrastructure.Factory;
+using CodeBase.Services;
 using CodeBase.UI.Services.Factory;
 using Cysharp.Threading.Tasks;
 
@@ -11,13 +14,16 @@ namespace CodeBase.Infrastructure.States
 		private readonly GameStateMachine _stateMachine;
 		private readonly ISceneLoaderService _sceneLoaderService;
         private readonly IUiFactory _uiFactory;
+        private readonly IGameFactory _gameFactory;
+
 
         public LoadLevelState(GameStateMachine gameStateMachine,
-			ISceneLoaderService sceneLoaderService, IUiFactory uiFactory)
+			ISceneLoaderService sceneLoaderService, IUiFactory uiFactory, IGameFactory gameFactory)
 		{
 			_stateMachine = gameStateMachine;
             _sceneLoaderService = sceneLoaderService;
             _uiFactory = uiFactory;
+            _gameFactory = gameFactory;
 		}
 
 		public async void Enter()
@@ -26,12 +32,19 @@ namespace CodeBase.Infrastructure.States
 				.LoadMainMenuSceneAsync(LevelSceneName);
 			await UniTask.WaitUntil(() => loadingMainMenuOperation.Status == UniTaskStatus.Succeeded);
 
+			await _gameFactory.WarmUp();
 			await InitUIRoot();
+			await InitLevel();
 
 			_stateMachine.Enter<GameLoopState>();
 		}
 
-		public void Exit() { }
+        private async UniTask InitLevel()
+		{
+			await _gameFactory.CreateLevelAsync();
+		}
+
+        public void Exit() { }
 
 		private async UniTask InitUIRoot() =>
 		  await _uiFactory.CreateUIRoot();
