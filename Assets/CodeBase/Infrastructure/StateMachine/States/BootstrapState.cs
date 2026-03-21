@@ -2,10 +2,11 @@
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
 using CodeBase.UI.Services.Factory;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-    public class BootstrapState : IState
+    public class BootstrapState : IPayloadedState<Canvas>
     {
         private readonly GameStateMachine _stateMachine;
         private readonly AllServices _services;
@@ -18,11 +19,11 @@ namespace CodeBase.Infrastructure.States
             RegisterServices();
         }
 
-        public void Enter() =>
-          EnterLoadLevel();
+        public void Enter(Canvas loadingScreen) =>
+          EnterLoadLevel(loadingScreen);
 
-        private void EnterLoadLevel() =>
-          _stateMachine.Enter<LoadLevelState>();
+        private void EnterLoadLevel(Canvas loadingScreen) =>
+          _stateMachine.Enter<LoadLevelState, Canvas>(loadingScreen);
 
         public void Exit() { }
 

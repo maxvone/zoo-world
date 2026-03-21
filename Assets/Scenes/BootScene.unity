@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e642500a36e3142bba8ba603ebbd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeBase.Infrastructure.GameBootstrapper
+  _loadingScreen: {fileID: 2092334233}
 --- !u!1 &1850581210
 GameObject:
   m_ObjectHideFlags: 0

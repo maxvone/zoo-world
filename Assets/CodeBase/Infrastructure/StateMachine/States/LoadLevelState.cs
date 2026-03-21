@@ -4,10 +4,11 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Services;
 using CodeBase.UI.Services.Factory;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-	public class LoadLevelState : IState
+	public class LoadLevelState : IPayloadedState<Canvas>
 	{
 		private const string LevelSceneName = "LevelScene"; //TODO: Move to config
 
@@ -26,8 +27,11 @@ namespace CodeBase.Infrastructure.States
             _gameFactory = gameFactory;
 		}
 
-		public async void Enter()
-		{
+        public void Enter(Canvas loadingScreen) =>
+			LoadLevelAsync(loadingScreen).Forget();
+
+        private async UniTask LoadLevelAsync(Canvas loadingScreen)
+        {
 			UniTask loadingMainMenuOperation = _sceneLoaderService
 				.LoadMainMenuSceneAsync(LevelSceneName);
 			await UniTask.WaitUntil(() => loadingMainMenuOperation.Status == UniTaskStatus.Succeeded);
@@ -36,8 +40,10 @@ namespace CodeBase.Infrastructure.States
 			await InitUIRoot();
 			await InitLevel();
 
+			loadingScreen.gameObject.SetActive(false);
 			_stateMachine.Enter<GameLoopState>();
-		}
+        }
+
 
         private async UniTask InitLevel()
 		{
