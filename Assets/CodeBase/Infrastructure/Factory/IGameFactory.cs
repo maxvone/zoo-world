@@ -10,5 +10,6 @@ namespace CodeBase.Infrastructure.Factory
         UniTask WarmUp();
         UniTask<GameObject> InstantiateAsync(string prefabPath, Vector2 at);
 		UniTask<GameObject> CreateLevelAsync();
+		UniTask<GameObject> CreateFrog(Vector2 at);
     }
 }

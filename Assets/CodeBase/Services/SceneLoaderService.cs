@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace CodeBase.Services
 {
-	public class SceneLoaderService : ISceneLoaderService
+    public class SceneLoaderService : ISceneLoaderService
 	{
 		public void Load(string sceneName) =>
           SceneManager.LoadScene(sceneName);

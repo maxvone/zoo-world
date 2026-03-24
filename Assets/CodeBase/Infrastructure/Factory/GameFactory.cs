@@ -1,5 +1,6 @@
-using System.Threading.Tasks;
+using CodeBase.Animals;
 using CodeBase.AssetManagement;
+using CodeBase.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -7,20 +8,19 @@ namespace CodeBase.Infrastructure.Factory
 {
 	public class GameFactory : IGameFactory
 	{
-		private readonly IAssetProvider _assets;
+        private readonly AllServices _allServices;
 
-		public GameFactory(IAssetProvider assets)
+		public GameFactory(AllServices allServices)
 		{
-			_assets = assets;
+			_allServices = allServices;
 		}
 
 		public async UniTask WarmUp()
 		{
-			await _assets.Load<GameObject>(AssetAddress.Level1Path);
-			//await _assets.Load<GameObject>(AssetAddress.HudPath);
+			await _allServices.Single<IAssetProvider>().Load<GameObject>(AssetAddress.Level1Path);
 
-			//GameObject enemyPrefab = await _assets.Load<GameObject>(AssetAddress.EnemyPath);
-			//_enemySpawner.Construct(enemyPrefab);
+			GameObject frogPrefab = await _allServices.Single<IAssetProvider>().Load<GameObject>(AssetAddress.FrogPath);
+			//_enemySpawner.Construct(frogPrefab);
 
 			//GameObject bulletPrefab = await _assets.Load<GameObject>(AssetAddress.HeroBulletPath);
 			//_heroBulletLauncher.Construct(bulletPrefab);
@@ -39,14 +39,13 @@ namespace CodeBase.Infrastructure.Factory
 			return levelInstance;
 		}
 
-		//public async Task<GameObject> CreateHero(Vector2 at)
-		//{
-		//    HeroInstance = await InstantiateAsync(AssetAddress.HeroPath, at);
-		//    HeroInstance.GetComponent<HeroMove>().Construct(_inputService);
-		//    HeroInstance.GetComponent<HeroAttack>().Construct(_inputService, this);
+		public async UniTask<GameObject> CreateFrog(Vector2 at)
+		{
+		    GameObject instance = await InstantiateAsync(AssetAddress.FrogPath, at);
+		    instance.GetComponent<Frog>().Construct(_allServices.Single<IBoundsReturnService>(), _allServices.Single<IDeathResolverService>());
 
-		//    return HeroInstance;
-		//}
+		    return instance;
+		}
 
 		//public GameObject CreateEnemy(Vector2 at)
 		//{
@@ -79,7 +78,7 @@ namespace CodeBase.Infrastructure.Factory
 
 		public async UniTask<GameObject> InstantiateAsync(string prefabPath, Vector2 at)
 		{
-			GameObject gameObject = await _assets.Instantiate(path: prefabPath, at: at);
+			GameObject gameObject = await _allServices.Single<IAssetProvider>().Instantiate(path: prefabPath, at: at);
 			return gameObject;
 		}
     }

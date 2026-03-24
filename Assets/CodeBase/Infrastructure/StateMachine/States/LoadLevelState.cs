@@ -39,6 +39,7 @@ namespace CodeBase.Infrastructure.States
 			await _gameFactory.WarmUp();
 			await InitUIRoot();
 			await InitLevel();
+			await _gameFactory.CreateFrog(Vector2.zero);
 
 			loadingScreen.gameObject.SetActive(false);
 			_stateMachine.Enter<GameLoopState>();

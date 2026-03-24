@@ -7,5 +7,8 @@ namespace CodeBase.AssetManagement
 
     //Game Object Addresses
     public const string Level1Path = "Level_1";
+
+    //Animals Addresses
+    public const string FrogPath = "Frog";
   }
 }
