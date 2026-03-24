@@ -6,11 +6,14 @@ using UnityEngine.Pool;
 
 namespace CodeBase.Animals
 {
+
     [RequireComponent(typeof(IMovementStrategy))]
     public abstract class AnimalBase : MonoBehaviour 
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private AnimalType _type;
+
+        public Action Fed;
 
         private IBoundsReturnService _boundsReturnService;
         private IDeathResolverService _deathResolverService;
@@ -83,5 +86,8 @@ namespace CodeBase.Animals
             IsAlive = false;
             _animalPools[GetType()].Release(this);
         }
+
+        public void Feed() =>
+            Fed?.Invoke();
     }
 }

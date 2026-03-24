@@ -30,23 +30,33 @@ namespace CodeBase.Services
             else
             {
                 AnimalBase prey = invocatorAnimal.Type == AnimalType.Prey ? invocatorAnimal : collidedWithAnimal;
-                KillPrey(prey);
+                AnimalBase predator = prey == invocatorAnimal ? collidedWithAnimal : invocatorAnimal;
+
+                KillPrey(prey, predator);
+
                 _uiFactory.Hud.UpdateDeadPreysCounter(_deadPreysCounter);
             }
         }
 
-        private void KillPrey(AnimalBase prey)
+        private void KillPrey(AnimalBase prey, AnimalBase predator)
         {
             prey.Die();
+            predator.Feed();
             _deadPreysCounter++;
         }
 
         private void RandomlyKillPredator(AnimalBase invocatorAnimal, AnimalBase collidedWithAnimal)
         {
             if (Random.Range(0, 2) == 0)
+            {
                 invocatorAnimal.Die();
+                collidedWithAnimal.Feed();
+            }
             else
+            {
                 collidedWithAnimal.Die();
+                invocatorAnimal.Feed();
+            }
 
             _deadPredatorsCounter++;
         }

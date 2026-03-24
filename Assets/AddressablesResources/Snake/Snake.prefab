@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7056842828922440462}
   - component: {fileID: -8313150141278698429}
   - component: {fileID: 4877295280105221479}
+  - component: {fileID: 894646118512386844}
   - component: {fileID: 6605448436437172925}
   - component: {fileID: 7805827525195340339}
   - component: {fileID: 8862900033580906359}
@@ -68,6 +69,19 @@ MonoBehaviour:
   _bounceOffLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &894646118512386844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340915154186889087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff5edbc4905aa64189b4474bcd43fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CodeBase.Animals.FedReactor
+  _animalBase: {fileID: -8313150141278698429}
 --- !u!33 &6605448436437172925
 MeshFilter:
   m_ObjectHideFlags: 0

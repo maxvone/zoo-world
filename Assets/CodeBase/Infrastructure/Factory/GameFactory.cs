@@ -36,8 +36,26 @@ namespace CodeBase.Infrastructure.Factory
 			return levelInstance;
 		}
 
-        public async UniTask<GameObject> CreateAnimal<T>(Vector2 at) where T : AnimalBase =>
-			_animalSpawner.Get<T>(at).gameObject;
+        public async UniTask<GameObject> CreateAnimal<T>(Vector2 at) where T : AnimalBase
+        {
+            AnimalBase animalBase = _animalSpawner.Get<T>(at);
+			ConfigureAnimal(animalBase);
+            return animalBase.gameObject;
+        }
+
+		private void ConfigureAnimal(AnimalBase animal)
+		{
+			if (animal is null)
+			{
+				Debug.LogError("Failed to configure animal: animal is null.");
+				return;
+			}
+
+			if (animal.TryGetComponent(out FedReactor fedReactor))
+				fedReactor.Construct(_allServices.Single<IAssetProvider>());
+		}
+
+
 
         public async UniTask<GameObject> InstantiateAsync(string prefabPath, Vector2 at)
 		{
