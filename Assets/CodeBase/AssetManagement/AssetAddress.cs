@@ -4,6 +4,7 @@ namespace CodeBase.AssetManagement
   {
     //UI Addresses
     public const string UiRootPath = "UiRoot";
+    public const string HudPath = "Hud";
 
     //Game Object Addresses
     public const string Level1Path = "Level_1";

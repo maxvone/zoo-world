@@ -35,7 +35,7 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IUiFactory>(new UiFactory(_services.Single<IAssetProvider>()));
             _services.RegisterSingle<IGameFactory>(new GameFactory(_services));
             _services.RegisterSingle<IBoundsReturnService>(new BoundsReturnService());
-            _services.RegisterSingle<IDeathResolverService>(new DeathResolverService());
+            _services.RegisterSingle<IDeathResolverService>(new DeathResolverService(_services.Single<IUiFactory>()));
             _services.RegisterSingle<IAnimalsSpawnerService>(new AnimalsSpawnerService(_services.Single<IGameFactory>()));
         }
 

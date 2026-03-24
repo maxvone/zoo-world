@@ -38,6 +38,7 @@ namespace CodeBase.Infrastructure.States
 
 			await _gameFactory.WarmUp();
 			await InitUIRoot();
+			await InitHud();
 			await InitLevel();
 
 			loadingScreen.gameObject.SetActive(false);
@@ -54,6 +55,9 @@ namespace CodeBase.Infrastructure.States
 
 		private async UniTask InitUIRoot() =>
 		  await _uiFactory.CreateUIRoot();
+
+		private async UniTask InitHud() =>
+		  await _uiFactory.CreateHud();
 
 	}
 }

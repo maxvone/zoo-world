@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: UserInterface
   m_GUID: 0907361b26f6ed14b98098353ce1cff2
   m_SerializeEntries:
+  - m_GUID: 7b4b8b741d56c2549bc3844c4c87b859
+    m_Address: Hud
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fae70da5de33f3e47b0754095c9d7600
     m_Address: UiRoot
     m_ReadOnly: 0
