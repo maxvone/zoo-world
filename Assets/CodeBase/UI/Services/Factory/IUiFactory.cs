@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using CodeBase.Services;
+﻿using CodeBase.Services;
 using CodeBase.UI.Services.Overlays;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

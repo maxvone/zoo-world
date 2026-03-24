@@ -2,7 +2,7 @@ using CodeBase.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace CodeBase.Animals
+namespace CodeBase.Animals.Components
 {
     [RequireComponent(typeof(AnimalBase))]
     public class FedReactor : MonoBehaviour

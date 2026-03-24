@@ -34,7 +34,6 @@ namespace CodeBase.Infrastructure.Factory
 
             _animalPrefabs[animalType] = animalPrefab;
 
-            // Create a pool for this prefab type
             _animalPools[animalType] = new ObjectPool<AnimalBase>(
                 () => CreateAnimal(animalType),
                 OnGetAnimal,

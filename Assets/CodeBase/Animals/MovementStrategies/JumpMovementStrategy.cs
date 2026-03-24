@@ -40,11 +40,9 @@ namespace CodeBase.Animals.MovementStrategies
 
         public void ChangeDirectionTowards(Vector3 target)
         {
-            // On next jump, use this direction instead of random
             _forcedDirection = (target - _rigidbody.position).normalized;
             _forcedDirection = new Vector3(_forcedDirection.Value.x, 0f, _forcedDirection.Value.z);
 
-            // Force an immediate jump towards safety
             _timer = _jumpInterval;
         }
 
@@ -57,7 +55,7 @@ namespace CodeBase.Animals.MovementStrategies
 
         private void Jump()
         {
-            _rigidbody.linearVelocity = Vector3.zero; // Reset previous momentum
+            _rigidbody.linearVelocity = Vector3.zero;
 
             Vector3 dir;
             if (_forcedDirection.HasValue)

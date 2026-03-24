@@ -46,12 +46,8 @@ namespace CodeBase.Infrastructure.States
         }
 
 
-        private async UniTask InitLevel()
-		{
+        private async UniTask InitLevel() =>
 			await _gameFactory.CreateLevelAsync();
-		}
-
-        public void Exit() { }
 
 		private async UniTask InitUIRoot() =>
 		  await _uiFactory.CreateUIRoot();
@@ -59,5 +55,6 @@ namespace CodeBase.Infrastructure.States
 		private async UniTask InitHud() =>
 		  await _uiFactory.CreateHud();
 
+        public void Exit() { }
 	}
 }

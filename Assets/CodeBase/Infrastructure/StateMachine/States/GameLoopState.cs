@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services;
 
 namespace CodeBase.Infrastructure.States
 {

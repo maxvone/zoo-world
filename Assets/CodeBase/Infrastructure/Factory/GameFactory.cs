@@ -1,4 +1,5 @@
 using CodeBase.Animals;
+using CodeBase.Animals.Components;
 using CodeBase.AssetManagement;
 using CodeBase.Services;
 using Cysharp.Threading.Tasks;

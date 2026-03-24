@@ -1,8 +1,9 @@
 using CodeBase.Animals;
+using CodeBase.Infrastructure.Factory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace CodeBase.Infrastructure.Factory
+namespace CodeBase.Infrastructure.Services
 {
     public class AnimalsSpawnerService : IAnimalsSpawnerService
     {
@@ -15,15 +16,13 @@ namespace CodeBase.Infrastructure.Factory
 
         public void StartOngoingSpawning()
         {
-            _ = SpawnAnimalsLoop();
+            SpawnAnimalsLoop().Forget();
         }
 
         private async UniTaskVoid SpawnAnimalsLoop()
         {
             while (true)
             {
-                //Vector2 spawnAt = GetRandomSpawnPosition();
-
                 if (Random.value < 0.5f)
                     await _gameFactory.CreateAnimal<Frog>(Vector2.zero);
                 else
@@ -31,13 +30,6 @@ namespace CodeBase.Infrastructure.Factory
 
                 await UniTask.Delay(2000);
             }
-        }
-
-        private static Vector2 GetRandomSpawnPosition()
-        {
-            float x = Random.Range(-8f, 8f);
-            float y = Random.Range(-4f, 4f);
-            return new Vector2(x, y);
         }
     }
 }

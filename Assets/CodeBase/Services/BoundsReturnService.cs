@@ -18,9 +18,6 @@ namespace CodeBase.Services
 			_max = max;
 		}
 
-		/// <summary>
-		/// Returns a correction direction if the animal is out of bounds, otherwise null.
-		/// </summary>
 		public Vector3? GetCorrectionDirection(Vector3 position)
 		{
 			float x = position.x;
