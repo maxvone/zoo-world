@@ -10,5 +10,6 @@ namespace CodeBase.AssetManagement
 
     //Animals Addresses
     public const string FrogPath = "Frog";
+    public const string SnakePath = "Snake";
   }
 }

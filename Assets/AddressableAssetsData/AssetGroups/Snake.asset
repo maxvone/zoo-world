@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Frog
+  m_Name: Snake
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Frog
-  m_GUID: bdd34a67ae63c0c468e95ef1834f04f8
+  m_GroupName: Snake
+  m_GUID: 53357c11ce5c78e448aa5a372478a0a2
   m_SerializeEntries:
-  - m_GUID: 2754f0b9813580942b6ae93ceb73a69b
-    m_Address: Frog
+  - m_GUID: ce98795023ab9bc438d47f5d69943a0e
+    m_Address: Snake
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -24,5 +24,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 91492628aba3a1c448dd86a5cc4d05ec, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 725128b5886c81648beb63143428e6b3, type: 2}
-    - {fileID: 11400000, guid: 6951684ff39881144b5208ebe5c3ba7c, type: 2}
+    - {fileID: 11400000, guid: 2249ab61860a88340a2814f807c45888, type: 2}
+    - {fileID: 11400000, guid: 29427082da223b444b1cc56138134838, type: 2}

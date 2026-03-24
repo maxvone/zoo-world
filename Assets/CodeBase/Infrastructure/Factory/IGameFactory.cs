@@ -11,5 +11,6 @@ namespace CodeBase.Infrastructure.Factory
         UniTask<GameObject> InstantiateAsync(string prefabPath, Vector2 at);
 		UniTask<GameObject> CreateLevelAsync();
 		UniTask<GameObject> CreateFrog(Vector2 at);
+		UniTask<GameObject> CreateSnake(Vector2 at);
     }
 }

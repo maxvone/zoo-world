@@ -20,6 +20,8 @@ namespace CodeBase.Infrastructure.Factory
 			await _allServices.Single<IAssetProvider>().Load<GameObject>(AssetAddress.Level1Path);
 
 			GameObject frogPrefab = await _allServices.Single<IAssetProvider>().Load<GameObject>(AssetAddress.FrogPath);
+			GameObject snakePrefab = await _allServices.Single<IAssetProvider>().Load<GameObject>(AssetAddress.SnakePath);
+
 			//_enemySpawner.Construct(frogPrefab);
 
 			//GameObject bulletPrefab = await _assets.Load<GameObject>(AssetAddress.HeroBulletPath);
@@ -43,6 +45,14 @@ namespace CodeBase.Infrastructure.Factory
 		{
 		    GameObject instance = await InstantiateAsync(AssetAddress.FrogPath, at);
 		    instance.GetComponent<Frog>().Construct(_allServices.Single<IBoundsReturnService>(), _allServices.Single<IDeathResolverService>());
+
+		    return instance;
+		}
+
+		public async UniTask<GameObject> CreateSnake(Vector2 at)
+		{
+		    GameObject instance = await InstantiateAsync(AssetAddress.SnakePath, at);
+		    instance.GetComponent<Snake>().Construct(_allServices.Single<IBoundsReturnService>(), _allServices.Single<IDeathResolverService>());
 
 		    return instance;
 		}

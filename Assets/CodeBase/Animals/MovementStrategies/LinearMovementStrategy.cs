@@ -40,6 +40,21 @@ namespace CodeBase.Animals.MovementStrategies
                 _rigidbody.linearVelocity = Vector3.zero;
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            // Only reflect off walls, not other animals
+            if (collision.gameObject.GetComponent<AnimalBase>() != null)
+                return;
+
+            // Get the normal of the wall we hit
+            Vector3 normal = collision.contacts[0].normal;
+            
+            // Reflect the direction
+            _direction = Vector3.Reflect(_direction, normal);
+            _direction.y = 0; // Keep movement on XZ plane
+            _direction = _direction.normalized;
+        }
+
         private static Vector3 GetRandomDirection()
         {
             var angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;

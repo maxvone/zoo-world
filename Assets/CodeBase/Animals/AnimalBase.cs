@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Animals
 {
-
+    [RequireComponent(typeof(IMovementStrategy))]
     public abstract class AnimalBase : MonoBehaviour 
     {
         [SerializeField] private Rigidbody _rigidbody;
@@ -23,12 +23,14 @@ namespace CodeBase.Animals
             _boundsReturnService = boundsReturnService;
             _deathResolverService = deathResolverService;
 
-            _movementStrategy = LoadMovementStrategy();
-            _movementStrategy.Initialize();
+            InitializeMovementStrategy();
         }
 
-        protected virtual IMovementStrategy LoadMovementStrategy() =>
-            GetComponent<IMovementStrategy>() ?? gameObject.AddComponent<LinearMovementStrategy>();
+        private void InitializeMovementStrategy()
+        {
+            _movementStrategy = GetComponent<IMovementStrategy>();
+            _movementStrategy.Initialize();
+        }
 
         protected virtual void FixedUpdate()
         {
@@ -44,7 +46,18 @@ namespace CodeBase.Animals
             var correctedDirection = _boundsReturnService.GetCorrectionDirection(transform.position);
 
             if (correctedDirection.HasValue)
-                _movementStrategy.ChangeDirectionTowards(transform.position + correctedDirection.Value);
+            {
+                var offsetDirection = ApplyAngleOffset(correctedDirection.Value);
+                _movementStrategy.ChangeDirectionTowards(transform.position + offsetDirection);
+            }
+        }
+
+        private Vector3 ApplyAngleOffset(Vector3 direction)
+        {
+            float angle = Mathf.Atan2(direction.z, direction.x);
+            float angleOffset = Random.Range(-30f, 30f) * Mathf.Deg2Rad;
+            float newAngle = angle + angleOffset;
+            return new Vector3(Mathf.Cos(newAngle), 0f, Mathf.Sin(newAngle));
         }
 
         protected virtual void OnCollisionEnter(Collision collision)
