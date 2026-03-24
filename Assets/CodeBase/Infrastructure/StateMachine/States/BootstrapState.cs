@@ -31,7 +31,6 @@ namespace CodeBase.Infrastructure.States
         private void RegisterServices()
         {
             RegisterAssetProvider();
-            _services.RegisterSingle<IStaticDataService>(new StaticDataService(_services.Single<IAssetProvider>()));
             _services.RegisterSingle<ISceneLoaderService>(new SceneLoaderService());
             _services.RegisterSingle<IUiFactory>(new UiFactory(_services.Single<IAssetProvider>()));
             _services.RegisterSingle<IGameFactory>(new GameFactory(_services));
