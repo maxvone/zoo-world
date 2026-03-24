@@ -1,6 +1,8 @@
-using CodeBase.Animals.MovementStrategies;
+using System;
+using System.Collections.Generic;
 using CodeBase.Services;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace CodeBase.Animals
 {
@@ -12,16 +14,18 @@ namespace CodeBase.Animals
 
         private IBoundsReturnService _boundsReturnService;
         private IDeathResolverService _deathResolverService;
-
+        private Dictionary<Type, IObjectPool<AnimalBase>> _animalPools;
         private IMovementStrategy _movementStrategy;
 
         public AnimalType Type => _type;
-        public bool IsAlive { get; private set; } = true;
+        public bool IsAlive { get; set; } = true;
 
-        public void Construct(IBoundsReturnService boundsReturnService, IDeathResolverService deathResolverService)
+        public void Construct(IBoundsReturnService boundsReturnService, IDeathResolverService deathResolverService,
+            Dictionary<Type, IObjectPool<AnimalBase>> animalPools)
         {
             _boundsReturnService = boundsReturnService;
             _deathResolverService = deathResolverService;
+            _animalPools = animalPools;
 
             InitializeMovementStrategy();
         }
@@ -55,7 +59,7 @@ namespace CodeBase.Animals
         private Vector3 ApplyAngleOffset(Vector3 direction)
         {
             float angle = Mathf.Atan2(direction.z, direction.x);
-            float angleOffset = Random.Range(-30f, 30f) * Mathf.Deg2Rad;
+            float angleOffset = UnityEngine.Random.Range(-30f, 30f) * Mathf.Deg2Rad;
             float newAngle = angle + angleOffset;
             return new Vector3(Mathf.Cos(newAngle), 0f, Mathf.Sin(newAngle));
         }
@@ -74,7 +78,10 @@ namespace CodeBase.Animals
         private void HandleCollisionWith(AnimalBase otherAnimal) =>
             _deathResolverService.ResolveDeath(this, otherAnimal);
 
-        public void Die() =>
+        public void Die()
+        {
             IsAlive = false;
+            _animalPools[GetType()].Release(this);
+        }
     }
 }

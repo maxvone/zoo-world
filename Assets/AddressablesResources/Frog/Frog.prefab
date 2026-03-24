@@ -64,8 +64,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeBase.Animals.MovementStrategies.JumpMovementStrategy
   _rigidbody: {fileID: 8862900033580906359}
-  _jumpInterval: 2
-  _jumpForce: 3
+  _jumpInterval: 0.5
+  _jumpForce: 4
 --- !u!33 &6605448436437172925
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 500147293bfb4c84e8f913d09a4718c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

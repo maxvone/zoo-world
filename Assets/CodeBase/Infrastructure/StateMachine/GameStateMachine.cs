@@ -21,7 +21,8 @@ namespace CodeBase.Infrastructure.States
                     services.Single<ISceneLoaderService>(),
                     services.Single<IUiFactory>(),
                     services.Single<IGameFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(),
+                [typeof(GameLoopState)] = new GameLoopState(this,
+                    services.Single<IAnimalsSpawnerService>()),
             };
         }
 
